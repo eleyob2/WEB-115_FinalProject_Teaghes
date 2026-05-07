@@ -1,26 +1,29 @@
 # Custom Tournament Bracket Builder
 **WEB-115 Final Project Proposal**
-Student: [Your Name] | Repo: `WEB-115_FinalProject_[LastName]`
+Student: Elnatan Teaghes | Repo: `[WEB-115_FinalProject_Teaghes]([url](https://github.com/eleyob2/WEB-115_FinalProject_Teaghes.git))`
 
 ---
 
 ## Overview
 
-This is a web app that lets users build and run single-elimination tournament brackets for anything they want — favorite foods, video games, movies, songs, athletes, whatever. The user names the tournament, adds contestants (up to 16), and the app generates the full bracket automatically. Users click to advance winners round by round until a champion is crowned. Every tournament is saved to `localStorage` so users can close the tab and pick up where they left off.
+This project is a web-based Payroll Management System that allows a manager to add employees, enter work hours or salary information, and automatically calculate payroll results including gross pay, deductions, and net pay. The application is designed to model a simplified real-world payroll workflow while remaining manageable within the course timeline.
 
-The target user is anyone who wants a fast, fun way to settle a debate or rank a list. No spreadsheet or third-party bracket site required.
+Users can create and manage multiple employees, calculate payroll for a pay period, and view payroll summaries dynamically generated on the page. All payroll data is saved in the browser so users can close the app and return without losing information.
+
+The target user is a small business owner, manager, or student who wants a simple, easy-to-use payroll calculator without needing spreadsheet software or a backend server.
 
 ---
 
 ## Features
 
-- Create a new named tournament and add up to 16 contestants.
-- App auto-generates a balanced single-elimination bracket from the entry list.
-- Click to select the winner of each match and advance them to the next round.
-- Bracket updates in real time as winners are chosen — completed matches are visually locked and greyed out.
-- A champion screen appears when the final match is decided.
-- All tournament state is saved to `localStorage` — progress survives a page refresh.
-- Users can reset a tournament to start over or delete it entirely.
+- Add new employees with name, role, and pay type (hourly or salaried).
+-	Enter hours worked for hourly employees and automatically calculate overtime pay.
+-	Calculate gross pay, deductions, and net pay for each employee.
+-	Display a payroll summary table generated dynamically from employee data.
+-	Edit or remove employees from the system.
+-	Save all employee and payroll data so progress persists between sessions.
+-	Reset payroll data after a pay period is complete.
+
 
 ---
 
@@ -28,30 +31,24 @@ The target user is anyone who wants a fast, fun way to settle a debate or rank a
 
 | Requirement | Implementation |
 |---|---|
-| **If Statements & Loops** | Generating the bracket requires looping over contestants to pair them into first-round matches. If statements determine whether a round is complete (all winners chosen) before unlocking the next round, and check edge cases like odd contestant counts or a bye slot. |
-| **Event Listeners** | Click listeners on each match card select the winner and trigger a re-render. A submit listener on the setup form kicks off bracket generation. A reset button clears state after a confirmation check. |
-| **DOM Element Creation** | The entire bracket (every round column, match card, contestant name label, and winner indicator) is built dynamically with `createElement` and `appendChild`. Nothing is hardcoded in the HTML beyond the app shell. |
-| **Classes & Subclasses** | A base `Tournament` class holds the contestant list, bracket state, and methods like `generateBracket()` and `recordWinner()`. `SingleEliminationTournament` extends `Tournament` and implements the specific bracket-advancement logic. A `Match` class represents each individual pairing with properties for both contestants and the winner. |
+| **If Statements & Loops** | Loops iterate through all employees to calculate and display payroll results. If statements determine pay type (hourly vs salaried), apply overtime when hours exceed 40, and handle deduction calculations. |
+| **Event Listeners** | Submit listeners handle adding employees and calculating payroll. Click listeners allow users to remove employees, recalculate payroll, or reset the system. |
+| **DOM Element Creation** | Employee cards, payroll rows, and summary totals are created dynamically using createElement() and appendChild(). No payroll data is hardcoded in the HTML. |
+| **Classes & Subclasses** | A base Employee class stores shared properties like name and base pay. HourlyEmployee and SalariedEmployee extend Employee and override payroll calculation logic using extends and super(). |
 
 ---
 
 ## DLC — Additional Topics
 
 ### JSON & Local Storage
-The full tournament object — contestant names, match results, current round — is serialized with `JSON.stringify()` and saved to `localStorage` after every state change. On load, `JSON.parse()` restores the bracket exactly where the user left off. This means no data is lost between sessions without any backend.
-
-### Fetch & Public APIs
-When a user starts a tournament in "Music Mode," the app fetches the top tracks for a given artist from the MusicBrainz API and pre-fills the contestant list automatically, so users can immediately bracket an artist's discography without typing anything in.
-
-### HTML Canvas
-The bracket is rendered visually on an HTML `<canvas>` element. Contestants are drawn as labeled boxes, connecting lines show the bracket structure, and completed matches are styled differently from pending ones. Canvas re-renders after every winner selection to reflect the updated state.
+All employee records and payroll results are serialized using JSON.stringify() and stored in localStorage. When the app loads, JSON.parse() restores the saved data so users can continue where they left off without a backend server. This allows payroll information to persist between browser sessions.
 
 ---
 
 ## Tech Stack
 
-- HTML, CSS, Vanilla JavaScript
-- MusicBrainz API *(free, no API key required)*
-- `localStorage` for tournament persistence
-- HTML Canvas for bracket rendering
+- HTML
+- CSS
+- Vanilla JavaScript
+- `localStorage` for persistence data
 - VS Code + GitHub
