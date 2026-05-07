@@ -1,6 +1,6 @@
 # Custom Tournament Bracket Builder
 **WEB-115 Final Project Proposal**
-Student: 'Elnatan Teaghes' | Repo: '[WEB-115_FinalProject_Teaghes]'
+Student: `Elnatan Teaghes` | Repo: `[WEB-115_FinalProject_Teaghes]`
 
 ---
 
@@ -41,7 +41,7 @@ The target user is a small business owner, manager, or student who wants a simpl
 ## DLC — Additional Topics
 
 ### JSON & Local Storage
-All employee records and payroll results are serialized using 'JSON.stringify()' and stored in 'localStorage'. When the app loads, 'JSON.parse()' restores the saved data so users can continue where they left off without a backend server. This allows payroll information to persist between browser sessions.
+All employee records and payroll results are serialized using `JSON.stringify()` and stored in `localStorage`. When the app loads, `JSON.parse()` restores the saved data so users can continue where they left off without a backend server. This allows payroll information to persist between browser sessions.
 
 ---
 
