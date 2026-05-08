@@ -1,4 +1,4 @@
-# Custom Tournament Bracket Builder
+# Payroll Management System
 **WEB-115 Final Project Proposal**
 Student: `Elnatan Teaghes` | Repo: `[WEB-115_FinalProject_Teaghes]`
 
