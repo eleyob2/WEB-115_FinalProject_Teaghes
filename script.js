@@ -355,3 +355,4 @@ logoutButton.addEventListener("click", setLoggedOut);
 
 initializeStoredEmployees();
 
+
