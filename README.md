@@ -21,7 +21,7 @@ The target user is a small business owner, manager, or student who wants a simpl
 -	Calculate gross pay, deductions, and net pay for each employee.
 -	Display a payroll summary table generated dynamically from employee data.
 -	Edit or remove employees from the system.
--	Save all employee and payroll data so progress persists between sessions.
+- Save all employee and payroll data in browser localStorage so progress persists between sessions.
 -	Reset payroll data after a pay period is complete.
 
 
