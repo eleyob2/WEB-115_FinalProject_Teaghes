@@ -1,5 +1,5 @@
-const fileInput = document.getElementById("employee-file");
-const loginSection = document.getElementById("login-section");
+const fileInput = document.getElementById("employee-file"); 
+const loginSection = document.getElementById("login-section"); 
 const loginForm = document.getElementById("login-form");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
@@ -71,6 +71,8 @@ function initializeStoredEmployees() {
     loginSection.classList.remove("hidden");
     actionsSection.classList.add("hidden");
     showMessage("Loaded saved employees from a previous session. Please login.");
+  } else {
+    loadEmployeesFromCSVUrl("Payroll_Code-2.csv");
   }
 }
 
@@ -178,34 +180,28 @@ function createEmployeeFromType(name, password, rate, type) {
   return new HourlyEmployee(name, password, rate);
 }
 
-function loadEmployeesFromCSV(file) {
-  if (!file) {
-    showMessage("Please select an employee CSV file.", "error");
-    return;
-  }
+function loadEmployeesFromCSVUrl(url) {
+  fetch(url)
+    .then(response => response.text())
+    .then(text => {
+      employees = parseCSV(text);
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    employees = parseCSV(reader.result);
+      if (Object.keys(employees).length === 0) {
+        showMessage("No valid employee records found in the CSV.", "error");
+        return;
+      }
 
-    if (Object.keys(employees).length === 0) {
-      showMessage("No valid employee records found in the CSV.", "error");
-      return;
-    }
-
-    saveEmployees();
-    loginSection.classList.remove("hidden");
-    actionsSection.classList.add("hidden");
-    currentUser = null;
-    payResult.textContent = "";
-    showMessage("Employees loaded successfully and saved to local storage. Please login.");
-  };
-
-  reader.onerror = () => {
-    showMessage("Unable to read the selected CSV file.", "error");
-  };
-
-  reader.readAsText(file, "UTF-8");
+      saveEmployees();
+      loginSection.classList.remove("hidden");
+      actionsSection.classList.add("hidden");
+      currentUser = null;
+      payResult.textContent = "";
+      showMessage("Employees loaded successfully and saved to local storage. Please login.");
+    })
+    .catch(error => {
+      showMessage("Unable to load the CSV file.", "error");
+      console.error(error);
+    });
 }
 
 function setLoggedIn(username) {
@@ -342,11 +338,6 @@ function formatCurrency(value) {
   return `$${value.toFixed(2)}`;
 }
 
-fileInput.addEventListener("change", (event) => {
-  const file = event.target.files[0];
-  loadEmployeesFromCSV(file);
-});
-
 loginForm.addEventListener("submit", login);
 payrollForm.addEventListener("submit", calculatePayroll);
 printButton.addEventListener("click", printPay);
@@ -354,5 +345,3 @@ eventButton.addEventListener("click", showEvent);
 logoutButton.addEventListener("click", setLoggedOut);
 
 initializeStoredEmployees();
-
-
