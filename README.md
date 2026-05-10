@@ -6,6 +6,7 @@ Student: `Elnatan Teaghes` | Repo: `[WEB-115_FinalProject_Teaghes]`
 ## Login Instructions:
 
 Look into the the **Payroll_Code-2.csv** file. First column is `Usernames`, Second column is the `Passwords`, Third column is `Pay Rates`.
+
 **Ex**: Username: `Biruk` 
         Password: `Emp1`
         Rate: `50`
